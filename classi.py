@@ -22,10 +22,6 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
-  phanloai = st.tabs(['Phân loại'])
-  if "visibility" not in st.session_state:
-    st.session_state.horizontal = True
-  with phanloai:
     p = st.radio('Đặc trưng', ('Midterm (S6)', 'Trung bình homework (S-AVG)', 'GPA'), horizontal=st.session_state.horizontal)
     if p == 'Midterm (S6)' and p == 'Trung bình homework (S-AVG)':
      def mhpf():
