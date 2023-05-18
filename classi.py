@@ -90,7 +90,7 @@ def classi():
       model.fit(x_train, y_train)
       weightsmhf = model.coef_[0]
       biasmhf = model.intercept_[0] 
-      print(biasmhf)
+      st.write(biasmhf)
 
       y_test_pred = model.predict(x_test)
       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
