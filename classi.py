@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import plotly.graph_objects as go
 
+phanloai = st.tabs(['Phân loại'])
+
 df = pd.read_csv("py4ai-score.csv", low_memory=False)
 df['BONUS'].fillna(0, inplace = True)
 for i in range(1, 11):
@@ -22,7 +24,12 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
-   def mhpf():
+  if "visibility" not in st.session_state:
+    st.session_state.horizontal = True
+  with phanloai:
+    p = st.radio('Đặc trưng', ('Midterm (S6)', 'Trung bình homework (S-AVG)', 'GPA'), horizontal=st.session_state.horizontal)
+    if p == 'Midterm (S6)' and p == 'Trung bình homework (S-AVG)':
+     def mhpf():
       Xmhpf = df[['S6','S-AVG']].values.copy()
       ymhpf = []
       for i in range(len(df[['NAME']])):
@@ -37,7 +44,7 @@ def classi():
       biasmhpf = model.intercept_[0]
       w1mhpf, w2mhpf = weightsmhpf[0], weightsmhpf[1]
       
-      st.write('DỰ ĐOÁN HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERN & ĐIỂM TRUNG BÌNH HOMEWORK')
+      st.write('DỰ ĐOÁN HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM & ĐIỂM TRUNG BÌNH HOMEWORK')
 
       plt.scatter(Xmhpf[ymhpf==0,0], Xmhpf[ymhpf==0,1])
       plt.scatter(Xmhpf[ymhpf==1,0], Xmhpf[ymhpf==1,1])
@@ -49,37 +56,9 @@ def classi():
       plt.plot(x1mhpf,x2mhpf)
       st.pyplot(fig=None)
       
-   mhpf()
-
-   def mgpf():
-      Xmgpf = df[['S6','GPA']].values.copy()
-      ymgpf = []
-      for i in range(len(df[['NAME']])):
-        if Xmgpf[i][0] >= 6 and Xmgpf[i][1] >= 6:
-           ymgpf.append(1)
-        else:
-           ymgpf.append(0)
-      ymgpf = np.array(ymgpf)
-
-      model = LogisticRegression()
-      model.fit(Xmgpf, ymgpf)
-      weightsmgpf = model.coef_[0]
-      biasmgpf = model.intercept_[0]
-      w1mgpf, w2mgpf = weightsmgpf[0], weightsmgpf[1]
-
-      plt.scatter(Xmgpf[ymgpf==0,0], Xmgpf[ymgpf==0,1])
-      plt.scatter(Xmgpf[ymgpf==1,0], Xmgpf[ymgpf==1,1])
-      plt.legend(['S6', 'S-AVG', 'Decision Boundary'])
-      plt.xlabel('S-AVG')
-      plt.ylabel('S6')
-      x1mgpf = np.linspace(0,10,1000)
-      x2mgpf = -(w1mgpf*x1mgpf + biasmgpf) / w2mgpf
-      plt.plot(x1mgpf,x2mgpf)
-      st.pyplot(fig=None)
-
-   mgpf()
-
-   def mhf():
+     mhpf()
+     
+     def mhf():
       xmhf = df['S6'].values
       ymhf = df['S-AVG'].values
       x_train, x_test, y_train, y_test = train_test_split(xmhf, ymhf, test_size=.2, random_state=42)
@@ -94,6 +73,8 @@ def classi():
 
       y_test_pred = model.predict(x_test)
       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
+      
+      st.write('DỰ ĐOÁN ĐIỂM FINAL DỰA TRÊN MIDTERM & ĐIỂM TRUNG BÌNH HOMEWORK')
 
       plt.scatter(xmhf, ymhf)
       plt.plot(xmhf, model.predict(xmhf.reshape(-1,1)), c='y')
@@ -101,9 +82,40 @@ def classi():
       plt.ylabel('S6')
       st.pyplot(fig=None)
 
-   mhf()
+     mhf()
+    
+   elif p == 'Midterm (S6)' and p == 'GPA':
+    def mgpf():
+      Xmgpf = df[['S6','GPA']].values.copy()
+      ymgpf = []
+      for i in range(len(df[['NAME']])):
+        if Xmgpf[i][0] >= 6 and Xmgpf[i][1] >= 6:
+           ymgpf.append(1)
+        else:
+           ymgpf.append(0)
+      ymgpf = np.array(ymgpf)
 
-   def mgf():
+      model = LogisticRegression()
+      model.fit(Xmgpf, ymgpf)
+      weightsmgpf = model.coef_[0]
+      biasmgpf = model.intercept_[0]
+      w1mgpf, w2mgpf = weightsmgpf[0], weightsmgpf[1]
+      
+      st.write('DỰ ĐOÁN HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM & GPA')
+
+      plt.scatter(Xmgpf[ymgpf==0,0], Xmgpf[ymgpf==0,1])
+      plt.scatter(Xmgpf[ymgpf==1,0], Xmgpf[ymgpf==1,1])
+      plt.legend(['S6', 'S-AVG', 'Decision Boundary'])
+      plt.xlabel('S-AVG')
+      plt.ylabel('S6')
+      x1mgpf = np.linspace(0,10,1000)
+      x2mgpf = -(w1mgpf*x1mgpf + biasmgpf) / w2mgpf
+      plt.plot(x1mgpf,x2mgpf)
+      st.pyplot(fig=None)
+
+    mgpf()
+
+    def mgf():
       xmgf = df['S6'].values
       ymgf = df['GPA'].values
       x_train, x_test, y_train, y_test = train_test_split(xmgf, ymgf, test_size=.2, random_state=42)
@@ -117,6 +129,8 @@ def classi():
 
       y_test_pred = model.predict(x_test)
       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
+      
+      st.write('DỰ ĐOÁN ĐIỂM FINAL DỰA TRÊN MIDTERM & GP')
 
       plt.scatter(xmgf, ymgf)
       plt.plot(xmgf, model.predict(xmgf.reshape(-1,1)), c='y')
@@ -124,9 +138,11 @@ def classi():
       plt.ylabel('S6')
       st.pyplot(fig=None)
 
-   mgf()
+    mgf()
 
-   def barD():
+   elif p == 'Midterm (S6)' and p == 'GPA' and p == 'Trung bình homework (S-AVG)':
+    def barD():
+     st.write('PHÂN LOẠI HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM, ĐIỂM TRUNG BÌNH HOMEWORK, GPA')
       def pf(c):
        if c['GPA'] <= 6.:
          return "F"
@@ -169,6 +185,6 @@ def classi():
                           go.Scatter3d(x=df3['S6'], y=df3['S-AVG'], z=df3['GPA'], mode='markers')])
       st.pyplot(fig)
    
-   barD()
+    barD()
 
 classi()
