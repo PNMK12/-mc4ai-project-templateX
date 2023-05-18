@@ -43,9 +43,7 @@ def classi():
       weightsmhpf = model.coef_[0]
       biasmhpf = model.intercept_[0]
       w1mhpf, w2mhpf = weightsmhpf[0], weightsmhpf[1]
-      
       st.write('DỰ ĐOÁN HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM & ĐIỂM TRUNG BÌNH HOMEWORK')
-
       plt.scatter(Xmhpf[ymhpf==0,0], Xmhpf[ymhpf==0,1])
       plt.scatter(Xmhpf[ymhpf==1,0], Xmhpf[ymhpf==1,1])
       plt.legend(['S6', 'S-AVG', 'Decision Boundary'])
@@ -55,33 +53,26 @@ def classi():
       x2mhpf = -(w1mhpf*x1mhpf + biasmhpf) / w2mhpf
       plt.plot(x1mhpf,x2mhpf)
       st.pyplot(fig=None)
-      
      mhpf()
-     
      def mhf():
       xmhf = df['S6'].values
       ymhf = df['S-AVG'].values
       x_train, x_test, y_train, y_test = train_test_split(xmhf, ymhf, test_size=.2, random_state=42)
       x_train = x_train.reshape(-1,1)
       x_test = x_test.reshape(-1,1)
-
       model = LinearRegression()
       model.fit(x_train, y_train)
       weightsmhf = model.coef_[0]
       biasmhf = model.intercept_[0] 
       st.write(biasmhf)
-
       y_test_pred = model.predict(x_test)
       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
-      
       st.write('DỰ ĐOÁN ĐIỂM FINAL DỰA TRÊN MIDTERM & ĐIỂM TRUNG BÌNH HOMEWORK')
-
       plt.scatter(xmhf, ymhf)
       plt.plot(xmhf, model.predict(xmhf.reshape(-1,1)), c='y')
       plt.xlabel('S-AVG')
       plt.ylabel('S6')
       st.pyplot(fig=None)
-      
      mhf()
     elif p == 'Midterm (S6)' and p == 'GPA':
      def mgpf():
@@ -93,15 +84,12 @@ def classi():
         else:
            ymgpf.append(0)
       ymgpf = np.array(ymgpf)
-
       model = LogisticRegression()
       model.fit(Xmgpf, ymgpf)
       weightsmgpf = model.coef_[0]
       biasmgpf = model.intercept_[0]
       w1mgpf, w2mgpf = weightsmgpf[0], weightsmgpf[1]
-      
       st.write('DỰ ĐOÁN HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM & GPA')
-
       plt.scatter(Xmgpf[ymgpf==0,0], Xmgpf[ymgpf==0,1])
       plt.scatter(Xmgpf[ymgpf==1,0], Xmgpf[ymgpf==1,1])
       plt.legend(['S6', 'S-AVG', 'Decision Boundary'])
@@ -111,32 +99,25 @@ def classi():
       x2mgpf = -(w1mgpf*x1mgpf + biasmgpf) / w2mgpf
       plt.plot(x1mgpf,x2mgpf)
       st.pyplot(fig=None)
-
      mgpf()
-
      def mgf():
       xmgf = df['S6'].values
       ymgf = df['GPA'].values
       x_train, x_test, y_train, y_test = train_test_split(xmgf, ymgf, test_size=.2, random_state=42)
       x_train = x_train.reshape(-1,1)
       x_test = x_test.reshape(-1,1)
-
       model = LinearRegression()
       model.fit(x_train, y_train)
       weightsmgf = model.coef_[0]
       biasmgf = model.intercept_[0] 
-
       y_test_pred = model.predict(x_test)
       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
-      
       st.write('DỰ ĐOÁN ĐIỂM FINAL DỰA TRÊN MIDTERM & GP')
-
       plt.scatter(xmgf, ymgf)
       plt.plot(xmgf, model.predict(xmgf.reshape(-1,1)), c='y')
       plt.xlabel('GPA')
       plt.ylabel('S6')
       st.pyplot(fig=None)
-
      mgf()
     elif p == 'Midterm (S6)' and p == 'GPA' and p == 'Trung bình homework (S-AVG)':
      def barD():
@@ -146,42 +127,32 @@ def classi():
          return "F"
        else:
          return "P"
-
       def pf_id(c):
        if c['PASS/FAIL'] == 'P':
          return "1"
        else:
          return "0"
-
       df['PASS/FAIL'] = df.apply(pf, axis=1)
       df['PASS/FAIL_ID'] = df.apply(pf_id, axis=1)
-
       XbarD = df[['S6','S-AVG','GPA']].values
       ybarD = df['PASS/FAIL_ID'].values
-
       model = LogisticRegression()
       model.fit(XbarD, ybarD)
       print('score:', round(model.score(XbarD, ybarD), 2))
       w1barD, w2barD, w3barD = model.coef_[0]
       bbarD = model.intercept_[0]
-
       xbound = np.array([XbarD[:,0].min(), XbarD[:,0].max()])
       ybound = np.array([XbarD[:,1].min(), XbarD[:,1].max()])
-
       xx, yy = np.meshgrid(xbound, ybound)
       xy = np.c_[xx.ravel(), yy.ravel()]
-
       zbound = -(w1barD*xy[:,0]+w2barD*xy[:,1]+bbarD)/w3barD
       zbound = zbound.reshape(xx.shape)
-
       df1 = df[['S6','S-AVG','GPA','PASS/FAIL','PASS/FAIL_ID']]
       df2 = df1[df1['PASS/FAIL_ID'] == '1']
       df3 = df1[df1['PASS/FAIL_ID'] == '0']
-
       fig = go.Figure(data=[go.Surface(x=xbound, y=ybound, z=zbound), 
                           go.Scatter3d(x=df2['S6'], y=df2['S-AVG'], z=df2['GPA'], mode='markers'),
                           go.Scatter3d(x=df3['S6'], y=df3['S-AVG'], z=df3['GPA'], mode='markers')])
       st.pyplot(fig)
-   
      barD()
 classi()
