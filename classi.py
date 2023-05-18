@@ -22,6 +22,7 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
+    S6, S_AVG, GPA = st.columns(3)
     st.write('Đặc trưng')
     S6 = st.checkbox('Midterm (S6)')
     S_AVG = st.checkbox('Trung bình homework (S-AVG)')
@@ -36,7 +37,7 @@ def classi():
         else:
           ymhpf.append(0)
       ymhpf = np.array(ymhpf)
-      model = LinearRegression()
+      model = LogisticRegression()
       model.fit(Xmhpf, ymhpf)
       weightsmhpf = model.coef_[0]
       biasmhpf = model.intercept_[0]
@@ -84,7 +85,7 @@ def classi():
         else:
            ymgpf.append(0)
       ymgpf = np.array(ymgpf)
-      model = LinearRegression()
+      model = LogisticRegression()
       model.fit(Xmgpf, ymgpf)
       weightsmgpf = model.coef_[0]
       biasmgpf = model.intercept_[0]
