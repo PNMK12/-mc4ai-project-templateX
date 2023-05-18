@@ -24,11 +24,11 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
-    S6, S_AVG, GPA = st.columns(3)
     st.write('Đặc trưng')
     S6 = st.checkbox('Midterm (S6)')
     S_AVG = st.checkbox('Trung bình homework (S-AVG)')
     GPA = st.checkbox('GPA')
+    S6, S_AVG, GPA = st.columns(3)
     if S6 and S_AVG:
      def mhpf():
       Xmhpf = df[['S6','S-AVG']].values.copy()
