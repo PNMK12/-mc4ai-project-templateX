@@ -89,7 +89,7 @@ def classi():
       model = LinearRegression()
       model.fit(x_train, y_train)
       weightsmhf = model.coef_[0]
-      biasmhf = model.intercept_ 
+      biasmhf = model.intercept_[0] 
       st.write(biasmhf)
 
       y_test_pred = model.predict(x_test)
