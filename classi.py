@@ -22,7 +22,7 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
- phanloai = st.tabs(['Phân loại'])
+  phanloai = st.tabs(['Phân loại'])
   if "visibility" not in st.session_state:
     st.session_state.horizontal = True
   with phanloai:
