@@ -23,76 +23,77 @@ df['S-AVG'] = avg
 
 def classi():
    def mhpf():
-      X = df[['S6','S-AVG']].values.copy()
-      y = []
+      Xmhpf = df[['S6','S-AVG']].values.copy()
+      ymhpf = []
       for i in range(len(df[['NAME']])):
-        if X[i][0] >= 6 and X[i][1] >= 6:
-          y.append(1)
+        if Xmhpf[i][0] >= 6 and Xmhpf[i][1] >= 6:
+          ymhpf.append(1)
         else:
-          y.append(0)
-      y = np.array(y)
+          ymhpf.append(0)
+      ymhpf = np.array(ymhpf)
       model = LogisticRegression()
-      model.fit(X, y)
-      weights = model.coef_[0]
-      bias = model.intercept_[0]
-      w1, w2 = weights[0], weights[1]
+      model.fit(Xmhpf, ymhpf)
+      weightsmhpf = model.coef_[0]
+      biasmhpf = model.intercept_[0]
+      w1mhpf, w2mhpf = weightsmhpf[0], weightsmhpf[1]
 
-      plt.scatter(X[y==0,0], X[y==0,1])
-      plt.scatter(X[y==1,0], X[y==1,1])
+      plt.scatter(Xmhpf[ymhpf==0,0], Xmhpf[ymhpf==0,1])
+      plt.scatter(Xmhpf[ymhpf==1,0], Xmhpf[ymhpf==1,1])
       plt.legend(['S6', 'S-AVG', 'Decision Boundary'])
       plt.xlabel('S-AVG')
       plt.ylabel('S6')
-      x1 = np.linspace(0, 10, 1000)
-      x2 = -(w1*x1+bias)/w2
-      plt.plot(x1,x2)
+      x1mhpf = np.linspace(0, 10, 1000)
+      x2mhpf = -(w1mhpf*x1mhpf + biasmhpf) / w2mhpf
+      plt.plot(x1mhpf,x2mhpf)
       st.pyplot(fig=None)
+      
    mhpf()
 
    def mgpf():
-      X = df[['S6','GPA']].values.copy()
-      y = []
+      Xmgpf = df[['S6','GPA']].values.copy()
+      ymgpf = []
       for i in range(len(df[['NAME']])):
-        if X[i][0] >= 6 and X[i][1] >= 6:
-           y.append(1)
+        if Xmgpf[i][0] >= 6 and Xmgpf[i][1] >= 6:
+           ymgpf.append(1)
         else:
-          y.append(0)
-      y = np.array(y)
+           ymgpf.append(0)
+      ymgpf = np.array(ymgpf)
 
       model = LogisticRegression()
-      model.fit(X, y)
-      weights = model.coef_[0]
-      bias = model.intercept_[0]
-      w1, w2 = weights[0], weights[1]
+      model.fit(Xmgpf, ymgpf)
+      weightsmgpf = model.coef_[0]
+      biasmgpf = model.intercept_[0]
+      w1mgpf, w2mgpf = weightsmgpf[0], weightsmgpf[1]
 
-      plt.scatter(X[y==0,0], X[y==0,1])
-      plt.scatter(X[y==1,0], X[y==1,1])
+      plt.scatter(Xmgpf[ymgpf==0,0], Xmgpf[ymgpf==0,1])
+      plt.scatter(Xmgpf[ymgpf==1,0], Xmgpf[ymgpf==1,1])
       plt.legend(['S6', 'S-AVG', 'Decision Boundary'])
       plt.xlabel('S-AVG')
       plt.ylabel('S6')
-      x1 = np.linspace(0,10,1000)
-      x2 = -(w1*x1+bias)/w2
-      plt.plot(x1,x2)
+      x1mgpf = np.linspace(0,10,1000)
+      x2mgpf = -(w1mgpf*x1mgpf + biasmgpf) / w2mgpf
+      plt.plot(x1mgpf,x2mgpf)
       st.pyplot(fig=None)
 
    mgpf()
 
    def mhf():
-      x = df['S6'].values
-      y = df['S-AVG'].values
-      x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.2, random_state=42)
+      xmhf = df['S6'].values
+      ymhf = df['S-AVG'].values
+      x_train, x_test, y_train, y_test = train_test_split(xmhf, ymhf, test_size=.2, random_state=42)
       x_train = x_train.reshape(-1,1)
       x_test = x_test.reshape(-1,1)
 
       model = LinearRegression()
       model.fit(x_train, y_train)
-      weights = model.coef_[0]
-      bias = model.intercept_[0] 
+      weightsmhf = model.coef_[0]
+      biasmhf = model.intercept_[0] 
 
       y_test_pred = model.predict(x_test)
       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
 
-      plt.scatter(x, y)
-      plt.plot(x, model.predict(x.reshape(-1,1)), c='y')
+      plt.scatter(xmhf, ymhf)
+      plt.plot(xmhf, model.predict(xmhf.reshape(-1,1)), c='y')
       plt.xlabel('S-AVG')
       plt.ylabel('S6')
       st.pyplot(fig=None)
@@ -100,22 +101,22 @@ def classi():
    mhf()
 
    def mgf():
-      x = df['S6'].values
-      y = df['GPA'].values
-      x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=.2, random_state=42)
+      xmgf = df['S6'].values
+      ymgf = df['GPA'].values
+      x_train, x_test, y_train, y_test = train_test_split(xmgf, ymgf, test_size=.2, random_state=42)
       x_train = x_train.reshape(-1,1)
       x_test = x_test.reshape(-1,1)
 
       model = LinearRegression()
       model.fit(x_train, y_train)
-      weights = model.coef_[0]
-      bias = model.intercept_[0] 
+      weightsmgf = model.coef_[0]
+      biasmgf = model.intercept_[0] 
 
       y_test_pred = model.predict(x_test)
       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
 
-      plt.scatter(x, y)
-      plt.plot(x, model.predict(x.reshape(-1,1)), c='y')
+      plt.scatter(xmgf, ymgf)
+      plt.plot(xmgf, model.predict(xmgf.reshape(-1,1)), c='y')
       plt.xlabel('GPA')
       plt.ylabel('S6')
       st.pyplot(fig=None)
@@ -138,22 +139,22 @@ def classi():
       df['PASS/FAIL'] = df.apply(pf, axis=1)
       df['PASS/FAIL_ID'] = df.apply(pf_id, axis=1)
 
-      X = df[['S6','S-AVG','GPA']].values
-      y = df['PASS/FAIL_ID'].values
+      XbarD = df[['S6','S-AVG','GPA']].values
+      ybarD = df['PASS/FAIL_ID'].values
 
       model = LogisticRegression()
-      model.fit(X, y)
-      print('score:', round(model.score(X, y), 2))
-      w1, w2, w3 = model.coef_[0]
-      b = model.intercept_[0]
+      model.fit(XbarD, ybarD)
+      print('score:', round(model.score(XbarD, ybarD), 2))
+      w1barD, w2barD, w3barD = model.coef_[0]
+      bbarD = model.intercept_[0]
 
-      xbound = np.array([X[:,0].min(), X[:,0].max()])
-      ybound = np.array([X[:,1].min(), X[:,1].max()])
+      xbound = np.array([XbarD[:,0].min(), XbarD[:,0].max()])
+      ybound = np.array([XbarD[:,1].min(), XbarD[:,1].max()])
 
       xx, yy = np.meshgrid(xbound, ybound)
       xy = np.c_[xx.ravel(), yy.ravel()]
 
-      zbound = -(w1*xy[:,0]+w2*xy[:,1]+b)/w3
+      zbound = -(w1barD*xy[:,0]+w2barD*xy[:,1]+bbarD)/w3barD
       zbound = zbound.reshape(xx.shape)
 
       df1 = df[['S6','S-AVG','GPA','PASS/FAIL','PASS/FAIL_ID']]
