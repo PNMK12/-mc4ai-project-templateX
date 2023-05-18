@@ -9,8 +9,6 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import plotly.graph_objects as go
 
-phanloai = st.tabs(['Phân loại'])
-
 df = pd.read_csv("py4ai-score.csv", low_memory=False)
 df['BONUS'].fillna(0, inplace = True)
 for i in range(1, 11):
@@ -24,6 +22,7 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
+ phanloai = st.tabs(['Phân loại'])
   if "visibility" not in st.session_state:
     st.session_state.horizontal = True
   with phanloai:
