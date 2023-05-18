@@ -66,8 +66,7 @@ def classi():
       model.fit(x_train, y_train)
       weightsmhf = model.coef_[0]
       biasmhf = model.intercept_
-      st.write(biasmhf)
-#       y_test_pred = model.predict(x_test)
+      y_test_pred = model.predict(x_test)
 #       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
       st.write('DỰ ĐOÁN ĐIỂM FINAL DỰA TRÊN MIDTERM & ĐIỂM TRUNG BÌNH HOMEWORK')
       plt.scatter(xmhf, ymhf)
@@ -114,7 +113,7 @@ def classi():
       model.fit(x_train, y_train)
       weightsmgf = model.coef_[0]
       biasmgf = model.intercept_
-#       y_test_pred = model.predict(x_test)
+      y_test_pred = model.predict(x_test)
 #       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
       st.write('DỰ ĐOÁN ĐIỂM FINAL DỰA TRÊN MIDTERM & GPA')
       plt.scatter(xmgf, ymgf)
