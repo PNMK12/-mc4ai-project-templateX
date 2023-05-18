@@ -67,8 +67,8 @@ def classi():
       weightsmhf = model.coef_[0]
       biasmhf = model.intercept_
       st.write(biasmhf)
-      y_test_pred = model.predict(x_test)
-      mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
+#       y_test_pred = model.predict(x_test)
+#       mae(y_test, y_test_pred), mse(y_test, y_test_pred), model.score(x_test, y_test)
       st.write('DỰ ĐOÁN ĐIỂM FINAL DỰA TRÊN MIDTERM & ĐIỂM TRUNG BÌNH HOMEWORK')
       plt.scatter(xmhf, ymhf)
       plt.plot(xmhf, model.predict(xmhf.reshape(-1,1)), c='y')
