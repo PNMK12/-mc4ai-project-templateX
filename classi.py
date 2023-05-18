@@ -84,8 +84,8 @@ def classi():
 
      mhf()
     
-   elif p == 'Midterm (S6)' and p == 'GPA':
-    def mgpf():
+    elif p == 'Midterm (S6)' and p == 'GPA':
+     def mgpf():
       Xmgpf = df[['S6','GPA']].values.copy()
       ymgpf = []
       for i in range(len(df[['NAME']])):
@@ -113,9 +113,9 @@ def classi():
       plt.plot(x1mgpf,x2mgpf)
       st.pyplot(fig=None)
 
-    mgpf()
+     mgpf()
 
-    def mgf():
+     def mgf():
       xmgf = df['S6'].values
       ymgf = df['GPA'].values
       x_train, x_test, y_train, y_test = train_test_split(xmgf, ymgf, test_size=.2, random_state=42)
@@ -138,11 +138,11 @@ def classi():
       plt.ylabel('S6')
       st.pyplot(fig=None)
 
-    mgf()
+     mgf()
 
-   elif p == 'Midterm (S6)' and p == 'GPA' and p == 'Trung bình homework (S-AVG)':
-    def barD():
-     st.write('PHÂN LOẠI HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM, ĐIỂM TRUNG BÌNH HOMEWORK, GPA')
+    elif p == 'Midterm (S6)' and p == 'GPA' and p == 'Trung bình homework (S-AVG)':
+     def barD():
+      st.write('PHÂN LOẠI HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM, ĐIỂM TRUNG BÌNH HOMEWORK, GPA')
       def pf(c):
        if c['GPA'] <= 6.:
          return "F"
@@ -185,6 +185,6 @@ def classi():
                           go.Scatter3d(x=df3['S6'], y=df3['S-AVG'], z=df3['GPA'], mode='markers')])
       st.pyplot(fig)
    
-    barD()
+     barD()
 
 classi()
