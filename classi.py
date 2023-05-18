@@ -22,8 +22,11 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
-    p = st.checkbox('Đặc trưng', ('Midterm (S6)', 'Trung bình homework (S-AVG)', 'GPA'), horizontal=st.session_state.horizontal)
-    if p == 'Midterm (S6)' and p == 'Trung bình homework (S-AVG)':
+    st.write('Đặc trưng')
+    S6 = st.checkbox('Midterm (S6)')
+    S_AVG = st.checkbox('Trung bình homework (S-AVG)')
+    GPA = st.checkbox('GPA')
+    if S6 and S_AVG:
      def mhpf():
       Xmhpf = df[['S6','S-AVG']].values.copy()
       ymhpf = []
@@ -69,7 +72,7 @@ def classi():
       plt.ylabel('S6')
       st.pyplot(fig=None)
      mhf()
-    elif p == 'Midterm (S6)' and p == 'GPA':
+    elif S6 and GPA:
      def mgpf():
       Xmgpf = df[['S6','GPA']].values.copy()
       ymgpf = []
@@ -114,7 +117,7 @@ def classi():
       plt.ylabel('S6')
       st.pyplot(fig=None)
      mgf()
-    elif p == 'Midterm (S6)' and p == 'GPA' and p == 'Trung bình homework (S-AVG)':
+    elif S6 and GPA and S_AVG:
      def barD():
       st.write('PHÂN LOẠI HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM, ĐIỂM TRUNG BÌNH HOMEWORK, GPA')
       def pf(c):
