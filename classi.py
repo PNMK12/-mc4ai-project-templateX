@@ -37,7 +37,7 @@ def classi():
       biasmhpf = model.intercept_[0]
       w1mhpf, w2mhpf = weightsmhpf[0], weightsmhpf[1]
       
-      st.write('BIỂU ĐỒ MÔ TẢ SỐ LƯỢNG HỌC SINH NAM VÀ NỮ')
+      st.write('DỰ ĐOÁN HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERN & ĐIỂM TRUNG BÌNH HOMEWORK')
 
       plt.scatter(Xmhpf[ymhpf==0,0], Xmhpf[ymhpf==0,1])
       plt.scatter(Xmhpf[ymhpf==1,0], Xmhpf[ymhpf==1,1])
@@ -89,7 +89,7 @@ def classi():
       model = LinearRegression()
       model.fit(x_train, y_train)
       weightsmhf = model.coef_[0]
-      biasmhf = model.intercept_[0] 
+      biasmhf = model.intercept_ 
       st.write(biasmhf)
 
       y_test_pred = model.predict(x_test)
