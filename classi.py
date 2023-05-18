@@ -36,7 +36,7 @@ def classi():
         else:
           ymhpf.append(0)
       ymhpf = np.array(ymhpf)
-      model = LogisticRegression()
+      model = LinearRegression()
       model.fit(Xmhpf, ymhpf)
       weightsmhpf = model.coef_[0]
       biasmhpf = model.intercept_[0]
@@ -51,6 +51,7 @@ def classi():
       x2mhpf = -(w1mhpf*x1mhpf + biasmhpf) / w2mhpf
       plt.plot(x1mhpf,x2mhpf)
       st.pyplot(fig=None)
+      st.set_option('deprecation.showPyplotGlobalUse', False)
      mhpf()
      def mhf():
       xmhf = df['S6'].values
@@ -71,6 +72,7 @@ def classi():
       plt.xlabel('S-AVG')
       plt.ylabel('S6')
       st.pyplot(fig=None)
+      st.set_option('deprecation.showPyplotGlobalUse', False)
      mhf()
     elif S6 and GPA:
      def mgpf():
@@ -82,7 +84,7 @@ def classi():
         else:
            ymgpf.append(0)
       ymgpf = np.array(ymgpf)
-      model = LogisticRegression()
+      model = LinearRegression()
       model.fit(Xmgpf, ymgpf)
       weightsmgpf = model.coef_[0]
       biasmgpf = model.intercept_[0]
@@ -97,6 +99,7 @@ def classi():
       x2mgpf = -(w1mgpf*x1mgpf + biasmgpf) / w2mgpf
       plt.plot(x1mgpf,x2mgpf)
       st.pyplot(fig=None)
+      st.set_option('deprecation.showPyplotGlobalUse', False)
      mgpf()
      def mgf():
       xmgf = df['S6'].values
@@ -116,6 +119,7 @@ def classi():
       plt.xlabel('GPA')
       plt.ylabel('S6')
       st.pyplot(fig=None)
+      st.set_option('deprecation.showPyplotGlobalUse', False)
      mgf()
     elif S6 and GPA and S_AVG:
      def barD():
@@ -151,6 +155,7 @@ def classi():
       fig = go.Figure(data=[go.Surface(x=xbound, y=ybound, z=zbound), 
                           go.Scatter3d(x=df2['S6'], y=df2['S-AVG'], z=df2['GPA'], mode='markers'),
                           go.Scatter3d(x=df3['S6'], y=df3['S-AVG'], z=df3['GPA'], mode='markers')])
-      st.pyplot(fig)
+      st.pyplot(fig = None)
+      st.set_option('deprecation.showPyplotGlobalUse', False)
      barD()
 classi()
