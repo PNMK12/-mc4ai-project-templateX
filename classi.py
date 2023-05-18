@@ -81,9 +81,8 @@ def classi():
       plt.xlabel('S-AVG')
       plt.ylabel('S6')
       st.pyplot(fig=None)
-
+      
      mhf()
-    
     elif p == 'Midterm (S6)' and p == 'GPA':
      def mgpf():
       Xmgpf = df[['S6','GPA']].values.copy()
@@ -139,7 +138,6 @@ def classi():
       st.pyplot(fig=None)
 
      mgf()
-
     elif p == 'Midterm (S6)' and p == 'GPA' and p == 'Trung bình homework (S-AVG)':
      def barD():
       st.write('PHÂN LOẠI HS ĐẬU/RỚT (PASS/FAIL) DỰA TRÊN MIDTERM, ĐIỂM TRUNG BÌNH HOMEWORK, GPA')
@@ -186,5 +184,4 @@ def classi():
       st.pyplot(fig)
    
      barD()
-
 classi()
