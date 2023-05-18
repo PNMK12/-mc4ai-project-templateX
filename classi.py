@@ -8,6 +8,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import plotly.graph_objects as go
+from sklearn.metrics import mean_absolute_error as mae
+from sklearn.metrics import mean_squared_error as mse
 
 df = pd.read_csv("py4ai-score.csv", low_memory=False)
 df['BONUS'].fillna(0, inplace = True)
