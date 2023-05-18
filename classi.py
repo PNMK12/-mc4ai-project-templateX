@@ -22,7 +22,7 @@ for i in df.index:
 df['S-AVG'] = avg
 
 def classi():
-    p = st.radio('Đặc trưng', ('Midterm (S6)', 'Trung bình homework (S-AVG)', 'GPA'), horizontal=st.session_state.horizontal)
+    p = st.checkbox('Đặc trưng', ('Midterm (S6)', 'Trung bình homework (S-AVG)', 'GPA'), horizontal=st.session_state.horizontal)
     if p == 'Midterm (S6)' and p == 'Trung bình homework (S-AVG)':
      def mhpf():
       Xmhpf = df[['S6','S-AVG']].values.copy()
